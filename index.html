@@ -341,7 +341,7 @@ function openDouyinSpeed(){location.href=`snssdk2329://search?keyword=${getSearc
 function openQQMusic(){location.href=`qqmusic://search?key=${getSearchKey()}`;}
 function openKuGou(){location.href=`kugou://search?keyword=${getSearchKey()}`;}
 function openKuWo(){location.href=`kuwo://search?key=${getSearchKey()}`;}
-function openQiShui(){location.href=`qishuimusic://search?keyword=${getSearchKey()}`;}
+function openQiShui(){location.href=`qishui://search?q=${getSearchKey()}`;}  /* 已修正为 qishui://search?q= */
 
 function applyFilter(){toggleFilterPanel();usedSongIndex=[];localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));goNextRandom();}
 function resetFilter(){selectedTags=[];document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));usedSongIndex=[];localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));goNextRandom();}
