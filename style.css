@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #f0f2f5;
+    font-family: "微软雅黑", sans-serif;
+    padding: 15px 10px;
+}
+
+/* 顶部导航 */
+.top-nav {
+    max-width: 1200px;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.site-title {
+    font-size: 24px;
+    color: #222;
+}
+.filter-top-btn {
+    padding: 8px 16px;
+    background: #6c5ce7;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* 筛选面板 */
+.filter-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 1200px;
+    margin: 0 auto 15px;
+}
+.filter-panel.open {
+    max-height: 1200px;
+}
+.filter-content {
+    padding: 20px;
+}
+.filter-section {
+    margin-bottom: 18px;
+}
+.filter-section h4 {
+    margin-bottom: 8px;
+    color: #333;
+}
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.filter-btn {
+    padding: 7px 14px;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    background: #f5f5f5;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.filter-btn.active {
+    background: #6c5ce7;
+    color: #fff;
+    border-color: #6c5ce7;
+}
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+.btn-apply {background: #27ae60;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;}
+.btn-reset {background: #ff6b6b;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;}
+
+/* 主容器 */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* 歌曲卡片 */
+.song-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    text-align: center;
+}
+.song-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 6px;
+}
+.song-singer {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 12px;
+}
+.song-desc {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-collect {background:#27ae60;color:#fff;}
+.btn-listen {background:#f39c12;color:#fff;}
+.btn-skip {background:#e74c3c;color:#fff;}
+.btn-block {background:#6c5ce7;color:#fff;}
+
+/* 平台图标卡片 */
+.platform-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.platform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+.platform-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.platform-item:hover {
+    transform: scale(1.05);
+}
+.platform-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.icon-inner {
+    width: 100%;
+    height: 100%;
+}
+.platform-label {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 抖音图标 */
+.douyin {background: #000;}
+.douyin-logo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #25F4EE 25%, #FE2C55 75%);
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>') center / contain no-repeat;
+}
+
+/* QQ音乐图标 */
+.qq {background: #12B7F5;}
+.qq-logo {
+    width: 100%;
+    height: 100%;
+    background: #31C27C;
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>') center / contain no-repeat;
+}
+
+/* 酷狗音乐图标 */
+.kugou {background: #3582F5;}
+.kugou-logo {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>') center / contain no-repeat;
+}
+
+/* 酷狗概念版图标 */
+.kgidea {background: #9370DB;}
+.kgidea-logo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4F46E5 0%, #818CF8 100%);
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') center / contain no-repeat;
+}
+
+/* 酷我音乐图标 */
+.kuwo {background: #FF5722;}
+.kuwo-logo {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V19h4v2H8v-2h4v-3.07z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V19h4v2H8v-2h4v-3.07z"/></svg>') center / contain no-repeat;
+}
+
+/* 汽水音乐图标 */
+.qishui {background: #00C88C;}
+.qishui-logo {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') center / contain no-repeat;
+}
+
+/* 抖音极速版图标 */
+.douyin-speed {background: #000;}
+.douyin-speed-logo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #25F4EE 25%, #FE2C55 75%);
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>') center / contain no-repeat;
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>') center / contain no-repeat;
+}
+
+/* 折叠板块 */
+.collapsible-section {
+    max-width: 1200px;
+    margin: 0 auto 12px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+.section-header {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: #f9f9f9;
+}
+.section-header h3 {
+    font-size: 17px;
+    color: #333;
+}
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
+    color: #555;
+    line-height: 1.8;
+}
+.collapsible-section.open .toggle-icon {
+    transform: rotate(180deg);
+}
+.collapsible-section.open .section-content {
+    max-height: 500px;
+    padding: 15px 20px;
+}
+.black-tag {
+    display: inline-block;
+    padding: 7px 14px;
+    background: #eee;
+    border-radius: 18px;
+    margin: 4px;
+    cursor: pointer;
+}
+.black-tag:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+/* 手机适配 */
+@media (max-width:768px){
+    .main-container {grid-template-columns:1fr;}
+    .platform-icon {width:45px;height:45px;}
+    .site-title {font-size:20px;}
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推歌小站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 顶部导航栏：标题 + 筛选按钮 同行布局 -->
+<div class="top-nav">
+    <h1 class="site-title">推歌小站</h1>
+    <button class="filter-top-btn" onclick="toggleFilterPanel()">🎛️ 标签筛选</button>
+</div>
+
+<!-- 可收起筛选面板 -->
+<div class="filter-panel" id="filterPanel">
+    <div class="filter-content">
+        <h3>标签筛选（可多选）</h3>
+
+        <!-- 场景 -->
+        <div class="filter-section">
+            <h4>场景</h4>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-tag="工作">工作</button>
+                <button class="filter-btn" data-tag="通勤">通勤</button>
+                <button class="filter-btn" data-tag="校园">校园</button>
+                <button class="filter-btn" data-tag="旅途">旅途</button>
+                <button class="filter-btn" data-tag="咖啡馆">咖啡馆</button>
+                <button class="filter-btn" data-tag="店铺">店铺</button>
+                <button class="filter-btn" data-tag="清晨">清晨</button>
+                <button class="filter-btn" data-tag="下午茶">下午茶</button>
+                <button class="filter-btn" data-tag="夜晚">夜晚</button>
+                <button class="filter-btn" data-tag="睡前">睡前</button>
+                <button class="filter-btn" data-tag="派对">派对</button>
+                <button class="filter-btn" data-tag="宅家">宅家</button>
+                <button class="filter-btn" data-tag="车载">车载</button>
+                <button class="filter-btn" data-tag="夜店">夜店</button>
+                <button class="filter-btn" data-tag="婚礼">婚礼</button>
+                <button class="filter-btn" data-tag="瑜伽">瑜伽</button>
+                <button class="filter-btn" data-tag="做家务">做家务</button>
+                <button class="filter-btn" data-tag="公共交通">公共交通</button>
+                <button class="filter-btn" data-tag="茶馆">茶馆</button>
+                <button class="filter-btn" data-tag="露营">露营</button>
+            </div>
+        </div>
+
+        <!-- 语种 -->
+        <div class="filter-section">
+            <h4>语种</h4>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-tag="国语">国语</button>
+                <button class="filter-btn" data-tag="粤语">粤语</button>
+                <button class="filter-btn" data-tag="英语">英语</button>
+                <button class="filter-btn" data-tag="日文">日文</button>
+                <button class="filter-btn" data-tag="韩语">韩语</button>
+                <button class="filter-btn" data-tag="闽南语">闽南语</button>
+            </div>
+        </div>
+
+        <!-- 风格 -->
+        <div class="filter-section">
+            <h4>风格</h4>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-tag="港乐">港乐</button>
+                <button class="filter-btn" data-tag="流行">流行</button>
+                <button class="filter-btn" data-tag="摇滚">摇滚</button>
+                <button class="filter-btn" data-tag="民谣">民谣</button>
+                <button class="filter-btn" data-tag="电子">电子</button>
+                <button class="filter-btn" data-tag="R&B">R&B</button>
+                <button class="filter-btn" data-tag="爵士">爵士</button>
+                <button class="filter-btn" data-tag="古风">古风</button>
+                <button class="filter-btn" data-tag="国风">国风</button>
+                <button class="filter-btn" data-tag="说唱">说唱</button>
+                <button class="filter-btn" data-tag="乡村">乡村</button>
+                <button class="filter-btn" data-tag="布鲁斯">布鲁斯</button>
+                <button class="filter-btn" data-tag="拉丁">拉丁</button>
+                <button class="filter-btn" data-tag="另类">另类</button>
+                <button class="filter-btn" data-tag="独立">独立</button>
+                <button class="filter-btn" data-tag="CityPop">CityPop</button>
+                <button class="filter-btn" data-tag="Lofi">Lofi</button>
+                <button class="filter-btn" data-tag="迪斯科">迪斯科</button>
+                <button class="filter-btn" data-tag="雷鬼">雷鬼</button>
+            </div>
+        </div>
+
+        <!-- 心情氛围 -->
+        <div class="filter-section">
+            <h4>心情/氛围</h4>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-tag="抒情">抒情</button>
+                <button class="filter-btn" data-tag="慵懒">慵懒</button>
+                <button class="filter-btn" data-tag="治愈">治愈</button>
+                <button class="filter-btn" data-tag="遗憾">遗憾</button>
+                <button class="filter-btn" data-tag="温柔">温柔</button>
+                <button class="filter-btn" data-tag="怀旧">怀旧</button>
+                <button class="filter-btn" data-tag="伤感">伤感</button>
+                <button class="filter-btn" data-tag="安静">安静</button>
+                <button class="filter-btn" data-tag="轻松">轻松</button>
+                <button class="filter-btn" data-tag="甜蜜">甜蜜</button>
+                <button class="filter-btn" data-tag="寂寞">寂寞</button>
+                <button class="filter-btn" data-tag="感动">感动</button>
+                <button class="filter-btn" data-tag="小清新">小清新</button>
+                <button class="filter-btn" data-tag="励志">励志</button>
+                <button class="filter-btn" data-tag="减压">减压</button>
+                <button class="filter-btn" data-tag="暗黑">暗黑</button>
+                <button class="filter-btn" data-tag="空灵">空灵</button>
+                <button class="filter-btn" data-tag="律动">律动</button>
+            </div>
+        </div>
+
+        <div class="filter-actions">
+            <button class="btn btn-apply" onclick="applyFilter()">✅ 确定筛选</button>
+            <button class="btn btn-reset" onclick="resetFilter()">🔄 重置</button>
+        </div>
+    </div>
+</div>
+
+<!-- 主内容区 -->
+<div class="main-container">
+    <!-- 歌曲卡片 -->
+    <div class="song-card">
+        <div class="song-name" id="songName">歌曲加载中...</div>
+        <div class="song-singer" id="songSinger"></div>
+        <div class="song-desc" id="songDesc"></div>
+
+        <div class="btn-group">
+            <button class="btn btn-collect" onclick="collectSong()">✅ 收录歌单</button>
+            <button class="btn btn-listen" onclick="listenOnly()">🎵 好听不收</button>
+            <button class="btn btn-skip" onclick="skipSong()">❌ 直接跳过</button>
+            <button class="btn btn-block" onclick="blockSinger()">🚫 屏蔽该歌手</button>
+        </div>
+    </div>
+
+    <!-- 音乐平台图标按钮区（已加上文字标注） -->
+    <div class="platform-card">
+        <div class="platform-buttons">
+            <!-- 抖音 -->
+            <div class="platform-item" onclick="openDouyin()">
+                <div class="platform-icon douyin">
+                    <div class="icon-inner">
+                        <div class="douyin-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">抖音</span>
+            </div>
+            <!-- QQ音乐 -->
+            <div class="platform-item" onclick="openQQMusic()">
+                <div class="platform-icon qq">
+                    <div class="icon-inner">
+                        <div class="qq-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">QQ音乐</span>
+            </div>
+            <!-- 酷狗音乐 -->
+            <div class="platform-item" onclick="openKuGou()">
+                <div class="platform-icon kugou">
+                    <div class="icon-inner">
+                        <div class="kugou-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">酷狗</span>
+            </div>
+            <!-- 酷狗概念版 -->
+            <div class="platform-item" onclick="openKuGouIdea()">
+                <div class="platform-icon kgidea">
+                    <div class="icon-inner">
+                        <div class="kgidea-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">酷狗概念版</span>
+            </div>
+            <!-- 酷我音乐 -->
+            <div class="platform-item" onclick="openKuWo()">
+                <div class="platform-icon kuwo">
+                    <div class="icon-inner">
+                        <div class="kuwo-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">酷我</span>
+            </div>
+            <!-- 汽水音乐 -->
+            <div class="platform-item" onclick="openQiShui()">
+                <div class="platform-icon qishui">
+                    <div class="icon-inner">
+                        <div class="qishui-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">汽水音乐</span>
+            </div>
+            <!-- 抖音极速版 -->
+            <div class="platform-item" onclick="openDouyinSpeed()">
+                <div class="platform-icon douyin-speed">
+                    <div class="icon-inner">
+                        <div class="douyin-speed-logo"></div>
+                    </div>
+                </div>
+                <span class="platform-label">抖音极速版</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 可折叠歌单 -->
+<div class="collapsible-section">
+    <div class="section-header" onclick="toggleSection('collectList')">
+        <h3>📁 已收录歌单</h3>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content" id="collectList"></div>
+</div>
+
+<div class="collapsible-section">
+    <div class="section-header" onclick="toggleSection('skipList')">
+        <h3>🚫 已避雷跳过</h3>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content" id="skipList"></div>
+</div>
+
+<div class="collapsible-section">
+    <div class="section-header" onclick="toggleSection('blacklist')">
+        <h3>🔒 歌手黑名单（点击解除屏蔽）</h3>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="section-content" id="blacklistBox"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

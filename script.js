@@ -1,0 +1,256 @@
+const songLibrary = [
+    { name: "不呼不吸几多秒", singer: "薛凯琪", desc: "港乐 抒情 少女 粤语" },
+    { name: "十万嬉皮", singer: "万能青年旅店", desc: "摇滚 独立 批判 国语" },
+    { name: "Wave in dream (DLYT-lofi)", singer: "AVITA", desc: "电子 Lofi 氛围感 英文" },
+    { name: "可否抱紧我", singer: "王菲", desc: "港乐 抒情 迷幻 粤语" },
+    { name: "改变自己", singer: "王力宏", desc: "流行 R&B 励志 国语" },
+    { name: "Eminence Front", singer: "The Who", desc: "摇滚 经典 英文 70s" },
+    { name: "Bad As I Used To Be", singer: "Chris Stapleton", desc: "乡村 摇滚 蓝调 英文" },
+    { name: "Disco Yes", singer: "Tom Misch、Poppy Ajudha", desc: "Nu-Jazz 放克 律动 英文" },
+    { name: "泪桥", singer: "伍佰 & China Blue", desc: "摇滚 抒情 国语 经典" },
+    { name: "What a Day", singer: "蔡徐坤", desc: "流行 电子 说唱 国语" },
+    { name: "寂寞流星群", singer: "林忆莲", desc: "港乐 抒情 都市 粤语" },
+    { name: "幻听", singer: "莫文蔚", desc: "流行 迷幻 国语 氛围感" },
+    { name: "灰伯爵的忌廉暇想", singer: "连诗雅", desc: "港乐 抒情 少女 粤语" },
+    { name: "恰似你的温柔", singer: "邓丽君", desc: "经典 抒情 国语 温柔" },
+    { name: "花与爱丽丝", singer: "杨千嬅", desc: "港乐 抒情 少女 粤语" },
+    { name: "Reality", singer: "Richard Sanderson", desc: "民谣 抒情 电影 英文" },
+    { name: "风景", singer: "陈洁仪", desc: "流行 抒情 都市 国语" },
+    { name: "初恋", singer: "莫文蔚", desc: "港乐 复古 轻快 粤语" },
+    { name: "远走高飞", singer: "林忆莲", desc: "流行 R&B 抒情 国语" },
+    { name: "モノクローム", singer: "具岛直子", desc: "CityPop 复古 日文 80s" },
+    { name: "仰望", singer: "杨丞琳", desc: "流行 抒情 励志 国语" },
+    { name: "Set for Life", singer: "Trent Dabbs", desc: "民谣 抒情 治愈 英文" },
+    { name: "Far Away", singer: "EASHA", desc: "流行 独立 空灵 英文" },
+    { name: "I Wanna Know", singer: "Joe", desc: "R&B 抒情 节奏 英文" },
+    { name: "MONTAGEM ALQUIMIA", singer: "h6tam", desc: "巴西 电子 律动 葡语" },
+    { name: "We Are The World", singer: "Michael Jackson", desc: "公益 流行 合唱 英文" },
+    { name: "十二楼", singer: "莫文蔚", desc: "都市 爵士 慵懒 国语" },
+    { name: "完美孤独", singer: "莫文蔚", desc: "流行 抒情 孤独 国语" },
+    { name: "未接来电", singer: "杨乃文", desc: "摇滚 独立 冷感 国语" },
+    { name: "May Rain", singer: "窦靖童", desc: "独立 另类 空灵 英文" },
+    { name: "冰河", singer: "温岚", desc: "流行 R&B 抒情 国语" },
+    { name: "回忆是红色天空", singer: "王菲", desc: "港乐 抒情 迷幻 粤语" },
+    { name: "是这样吗", singer: "莫文蔚", desc: "流行 抒情 慵懒 国语" },
+    { name: "是非题", singer: "范玮琪", desc: "流行 抒情 校园 国语" },
+    { name: "溜溜的情歌", singer: "莫文蔚", desc: "流行 轻快 节奏 国语" },
+    { name: "必杀技", singer: "古巨基", desc: "港乐 抒情 遗憾 粤语" },
+    { name: "Every Summertime", singer: "88rising", desc: "R&B 轻快 夏日 英文" },
+    { name: "sheluvme", singer: "Tai Verdes", desc: "流行 独立 轻松 英文" },
+    { name: "只有冰淇淋的烛光晚餐", singer: "莫文蔚", desc: "爵士 慵懒 都市 国语" },
+    { name: "No Tear No Cry", singer: "Enols Scroggins", desc: "灵魂乐 抒情 英文 70s" },
+    { name: "If I Ain't Got You", singer: "Alicia Keys", desc: "R&B 灵魂乐 抒情 英文" },
+    { name: "在我成为井井有条的大人之前", singer: "郭采洁", desc: "独立 抒情 治愈 国语" },
+    { name: "红粉菲菲", singer: "王菲", desc: "港乐 复古 轻快 粤语" },
+    { name: "小聪明", singer: "王菲", desc: "港乐 抒情 少女 粤语" },
+    { name: "我眼中的她", singer: "张国荣", desc: "港乐 抒情 温柔 粤语" },
+    { name: "把悲伤看透时", singer: "陈慧娴", desc: "港乐 抒情 遗憾 粤语" },
+    { name: "半途而废", singer: "王菲", desc: "流行 励志 轻快 国语" },
+    { name: "Remedy", singer: "蔡徐坤", desc: "流行 电子 抒情 国语" },
+    { name: "Colder (Explicit)", singer: "蔡徐坤", desc: "流行 电子 冷感 英文" },
+    { name: "爱情", singer: "莫文蔚", desc: "流行 抒情 遗憾 国语" },
+    { name: "执迷不悔", singer: "王菲", desc: "流行 抒情 坚定 国语" },
+    { name: "脸", singer: "王菲", desc: "流行 迷幻 空灵 国语" },
+    { name: "乘客", singer: "王菲", desc: "流行 慵懒 都市 国语" },
+    { name: "话题", singer: "莫文蔚", desc: "流行 抒情 都市 国语" },
+    { name: "男孩别哭", singer: "海龟先生", desc: "摇滚 雷鬼 轻快 国语" },
+    { name: "The One You Love", singer: "Glenn Frey", desc: "民谣 抒情 温柔 英文" },
+    { name: "EVERYTHING", singer: "The Black Skirts", desc: "独立 摇滚 抒情 韩文" },
+    { name: "绿色的旋律", singer: "陈洁仪", desc: "流行 抒情 治愈 国语" },
+    { name: "万水千山总是情", singer: "汪明荃", desc: "港乐 经典 抒情 粤语" },
+    { name: "难得有情人", singer: "关淑怡", desc: "港乐 抒情 温柔 粤语" },
+    { name: "外面的世界", singer: "莫文蔚", desc: "民谣 抒情 治愈 国语" },
+    { name: "不羁飞行", singer: "王菲", desc: "港乐 轻快 自由 粤语" },
+    { name: "讲不出再见", singer: "谭咏麟", desc: "港乐 抒情 离别 粤语" },
+    { name: "Dazzling You", singer: "Vivienne", desc: "CityPop 复古 日文 80s" },
+    { name: "心中的日月", singer: "王力宏", desc: "流行 国风 抒情 国语" },
+    { name: "月亮代表我的心", singer: "邓丽君", desc: "经典 抒情 温柔 国语" },
+    { name: "热情", singer: "黄凯芹", desc: "港乐 抒情 热烈 粤语" },
+    { name: "阴天", singer: "莫文蔚", desc: "流行 慵懒 都市 国语" },
+    { name: "Sugar", singer: "Maroon 5", desc: "流行 摇滚 轻快 英文" },
+    { name: "至少还有你", singer: "林忆莲", desc: "流行 抒情 坚定 国语" },
+    { name: "牡丹江", singer: "南拳妈妈", desc: "流行 国风 清新 国语" },
+    { name: "Free Loop", singer: "Daniel Powter", desc: "流行 轻快 励志 英文" },
+    { name: "月牙湾", singer: "F.I.R. 飞儿乐团", desc: "流行 国风 空灵 国语" },
+    { name: "Deadman", singer: "蔡徐坤", desc: "流行 电子 暗黑 英文" },
+    { name: "千千阙歌", singer: "陈慧娴", desc: "港乐 经典 离别 粤语" },
+    { name: "忽然之间", singer: "莫文蔚", desc: "流行 抒情 遗憾 国语" },
+    { name: "分开旅行 (Live)", singer: "黄龄、王赫野", desc: "流行 对唱 抒情 国语" },
+    { name: "终身美丽", singer: "郑秀文", desc: "港乐 抒情 励志 粤语" },
+    { name: "Levitating", singer: "Dua Lipa", desc: "流行 迪斯科 律动 英文" },
+    { name: "Running Up That Hill", singer: "Kate Bush", desc: "另类 流行 空灵 英文" },
+    { name: "糖不甩", singer: "薛凯琪", desc: "港乐 轻快 少女 粤语" },
+    { name: "深蓝", singer: "卢巧音", desc: "港乐 暗黑 抒情 粤语" },
+    { name: "其实我一直都想对你说", singer: "莫文蔚", desc: "流行 抒情 遗憾 国语" },
+    { name: "双城故事", singer: "莫文蔚", desc: "流行 抒情 治愈 国语" }
+];
+
+let collectList = JSON.parse(localStorage.getItem('collectList')) || [];
+let skipList = JSON.parse(localStorage.getItem('skipList')) || [];
+let blockedSingers = JSON.parse(localStorage.getItem('blockedSingers')) || [];
+let usedSongIndex = JSON.parse(localStorage.getItem('usedSongIndex')) || [];
+let selectedTags = [];
+
+// 标签按钮选中
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        const tag = btn.dataset.tag;
+        selectedTags.includes(tag) 
+            ? selectedTags = selectedTags.filter(t=>t!==tag) 
+            : selectedTags.push(tag);
+    });
+});
+
+// 筛选面板切换
+function toggleFilterPanel(){
+    document.getElementById('filterPanel').classList.toggle('open');
+}
+
+// 折叠板块切换
+function toggleSection(id){
+    document.getElementById(id).closest('.collapsible-section').classList.toggle('open');
+}
+
+// 获取搜索关键词
+function getSearchKey(){
+    const n = document.getElementById("songName").innerText;
+    const s = document.getElementById("songSinger").innerText;
+    return encodeURIComponent(`${n} ${s}`);
+}
+
+// 各平台唤起搜索（修正了酷狗概念版协议）
+function openDouyin(){
+    location.href = `snssdk1128://search?keyword=${getSearchKey()}`;
+}
+function openDouyinSpeed(){
+    location.href = `snssdk2329://search?keyword=${getSearchKey()}`;
+}
+function openQQMusic(){
+    location.href = `qqmusic://search?key=${getSearchKey()}`;
+}
+function openKuGou(){
+    location.href = `kugou://search?keyword=${getSearchKey()}`;
+}
+// 修正后的酷狗概念版协议
+function openKuGouIdea(){
+    location.href = `kugouconcept://search?keyword=${getSearchKey()}`;
+}
+function openKuWo(){
+    location.href = `kuwo://search?key=${getSearchKey()}`;
+}
+function openQiShui(){
+    location.href = `qishuimusic://search?keyword=${getSearchKey()}`;
+}
+
+// 筛选确定
+function applyFilter(){
+    toggleFilterPanel();
+    usedSongIndex = [];
+    localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));
+    goNextRandom();
+}
+// 重置筛选
+function resetFilter(){
+    selectedTags = [];
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    usedSongIndex = [];
+    localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));
+    goNextRandom();
+}
+
+function loadCurrentSong(song){
+    document.getElementById("songName").innerText = song.name;
+    document.getElementById("songSinger").innerText = song.singer;
+    document.getElementById("songDesc").innerText = song.desc;
+}
+
+// 筛选随机歌曲
+function getRandomSong(){
+    let valid = songLibrary.filter((item,idx)=>{
+        if(blockedSingers.includes(item.singer)) return false;
+        if(collectList.includes(`${item.name} - ${item.singer}`)) return false;
+        if(skipList.includes(`${item.name} - ${item.singer}`)) return false;
+        if(usedSongIndex.includes(idx)) return false;
+        if(selectedTags.length>0){
+            let tags = item.desc.split(' ');
+            for(let t of selectedTags) if(!tags.includes(t)) return false;
+        }
+        return true;
+    });
+    if(!valid.length) return null;
+    let rand = valid[Math.floor(Math.random()*valid.length)];
+    let idx = songLibrary.findIndex(s=>s.name===rand.name&&s.singer===rand.singer);
+    usedSongIndex.push(idx);
+    localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));
+    return rand;
+}
+
+// 功能按钮
+function collectSong(){
+    let s = getCurrentShowSong();
+    if(!s) return;
+    collectList.push(`${s.name} - ${s.singer}`);
+    localStorage.setItem('collectList',JSON.stringify(collectList));
+    renderList();goNextRandom();
+}
+function listenOnly(){goNextRandom();}
+function skipSong(){
+    let s = getCurrentShowSong();
+    if(!s) return;
+    skipList.push(`${s.name} - ${s.singer}`);
+    localStorage.setItem('skipList',JSON.stringify(skipList));
+    renderList();goNextRandom();
+}
+function blockSinger(){
+    let s = getCurrentShowSong();
+    if(!s) return;
+    if(!blockedSingers.includes(s.singer)){
+        blockedSingers.push(s.singer);
+        localStorage.setItem('blockedSingers',JSON.stringify(blockedSingers));
+    }
+    renderBlackList();goNextRandom();
+}
+
+function goNextRandom(){
+    let song = getRandomSong();
+    if(!song){
+        document.getElementById("songName").innerText = "当前筛选无更多歌曲";
+        document.getElementById("songSinger").innerText = "";
+        document.getElementById("songDesc").innerText = "请重置标签或更换筛选条件";
+        return;
+    }
+    loadCurrentSong(song);
+}
+function getCurrentShowSong(){
+    let n = document.getElementById("songName").innerText;
+    let s = document.getElementById("songSinger").innerText;
+    return songLibrary.find(x=>x.name===n&&x.singer===s);
+}
+
+function renderList(){
+    document.getElementById("collectList").innerText = collectList.join(" ｜ ");
+    document.getElementById("skipList").innerText = skipList.join(" ｜ ");
+}
+function renderBlackList(){
+    let box = document.getElementById('blacklistBox');
+    box.innerHTML = '';
+    blockedSingers.forEach((item,idx)=>{
+        let span = document.createElement('span');
+        span.className = 'black-tag';
+        span.innerText = item;
+        span.onclick = ()=>unBlockSinger(idx);
+        box.appendChild(span);
+    });
+}
+function unBlockSinger(idx){
+    blockedSingers.splice(idx,1);
+    localStorage.setItem('blockedSingers',JSON.stringify(blockedSingers));
+    renderBlackList();
+}
+
+window.onload = function(){
+    renderList();
+    renderBlackList();
+    goNextRandom();
+}
