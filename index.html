@@ -4,22 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>推歌小站</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#f0f2f5;font-family:"微软雅黑",sans-serif;padding:15px 10px;}
+        .top-nav{max-width:1200px;margin:0 auto 15px;display:flex;justify-content:space-between;align-items:center;}
+        .site-title{font-size:24px;color:#222;}
+        .filter-top-btn{padding:8px 16px;background:#6c5ce7;color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:15px;}
+        .filter-panel{max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:#fff;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.05);max-width:1200px;margin:0 auto 15px;}
+        .filter-panel.open{max-height:1200px;}
+        .filter-content{padding:20px;}
+        .filter-section{margin-bottom:18px;}
+        .filter-section h4{margin-bottom:8px;color:#333;}
+        .filter-buttons{display:flex;flex-wrap:wrap;gap:8px;}
+        .filter-btn{padding:7px 14px;border:1px solid #ddd;border-radius:18px;background:#f5f5f5;cursor:pointer;font-size:14px;transition:0.2s;}
+        .filter-btn.active{background:#6c5ce7;color:#fff;border-color:#6c5ce7;}
+        .filter-actions{display:flex;gap:10px;justify-content:center;margin-top:15px;}
+        .btn-apply{background:#27ae60;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;}
+        .btn-reset{background:#ff6b6b;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;}
+        .main-container{max-width:1200px;margin:0 auto 20px;display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+        .song-card{background:#fff;padding:25px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.06);text-align:center;}
+        .song-name{font-size:22px;font-weight:bold;color:#111;margin-bottom:6px;}
+        .song-singer{font-size:16px;color:#666;margin-bottom:12px;}
+        .song-desc{color:#444;line-height:1.6;margin-bottom:25px;}
+        .btn-group{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+        .btn{padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-size:14px;}
+        .btn-collect{background:#27ae60;color:#fff;}
+        .btn-listen{background:#f39c12;color:#fff;}
+        .btn-skip{background:#e74c3c;color:#fff;}
+        .btn-block{background:#6c5ce7;color:#fff;}
+        .platform-card{background:#fff;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;padding:20px;}
+        .platform-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
+        .platform-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:0.2s;}
+        .platform-item:hover{transform:scale(1.05);}
+        .platform-icon{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+        .icon-inner{width:100%;height:100%;}
+        .platform-label{font-size:12px;color:#666;text-align:center;white-space:nowrap;}
+        .douyin{background:#000;}
+        .douyin-logo{width:100%;height:100%;background:linear-gradient(45deg,#25F4EE 25%,#FE2C55 75%);mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>') center / contain no-repeat;-webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>') center / contain no-repeat;}
+        .qq{background:#12B7F5;}
+        .qq-logo{width:100%;height:100%;background:#31C27C;mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>') center / contain no-repeat;-webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>') center / contain no-repeat;}
+        .kugou{background:#3582F5;}
+        .kugou-logo{width:100%;height:100%;background:#fff;mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>') center / contain no-repeat;-webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>') center / contain no-repeat;}
+        .kuwo{background:#FF5722;}
+        .kuwo-logo{width:100%;height:100%;background:#fff;mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V19h4v2H8v-2h4v-3.07z"/></svg>') center / contain no-repeat;-webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V19h4v2H8v-2h4v-3.07z"/></svg>') center / contain no-repeat;}
+        .qishui{background:#00C88C;}
+        .qishui-logo{width:100%;height:100%;background:#fff;mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') center / contain no-repeat;-webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') center / contain no-repeat;}
+        .douyin-speed{background:#000;}
+        .douyin-speed-logo{width:100%;height:100%;background:linear-gradient(45deg,#25F4EE 25%,#FE2C55 75%);mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>') center / contain no-repeat;-webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>') center / contain no-repeat;}
+        .collapsible-section{max-width:1200px;margin:0 auto 12px;background:#fff;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.05);overflow:hidden;}
+        .section-header{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#f9f9f9;}
+        .section-header h3{font-size:17px;color:#333;}
+        .toggle-icon{transition:transform 0.3s ease;}
+        .section-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease;padding:0 20px;color:#555;line-height:1.8;}
+        .collapsible-section.open .toggle-icon{transform:rotate(180deg);}
+        .collapsible-section.open .section-content{max-height:500px;padding:15px 20px;}
+        .black-tag{display:inline-block;padding:7px 14px;background:#eee;border-radius:18px;margin:4px;cursor:pointer;}
+        .black-tag:hover{background:#ff6b6b;color:#fff;}
+        @media(max-width:768px){.main-container{grid-template-columns:1fr;}.platform-icon{width:45px;height:45px;}.site-title{font-size:20px;}}
+    </style>
 </head>
 <body>
 
-<!-- 顶部导航栏：标题 + 筛选按钮 同行布局 -->
 <div class="top-nav">
     <h1 class="site-title">推歌小站</h1>
     <button class="filter-top-btn" onclick="toggleFilterPanel()">🎛️ 标签筛选</button>
 </div>
 
-<!-- 可收起筛选面板 -->
 <div class="filter-panel" id="filterPanel">
     <div class="filter-content">
         <h3>标签筛选（可多选）</h3>
-
-        <!-- 场景 -->
         <div class="filter-section">
             <h4>场景</h4>
             <div class="filter-buttons">
@@ -45,8 +98,6 @@
                 <button class="filter-btn" data-tag="露营">露营</button>
             </div>
         </div>
-
-        <!-- 语种 -->
         <div class="filter-section">
             <h4>语种</h4>
             <div class="filter-buttons">
@@ -58,8 +109,6 @@
                 <button class="filter-btn" data-tag="闽南语">闽南语</button>
             </div>
         </div>
-
-        <!-- 风格 -->
         <div class="filter-section">
             <h4>风格</h4>
             <div class="filter-buttons">
@@ -84,8 +133,6 @@
                 <button class="filter-btn" data-tag="雷鬼">雷鬼</button>
             </div>
         </div>
-
-        <!-- 心情氛围 -->
         <div class="filter-section">
             <h4>心情/氛围</h4>
             <div class="filter-buttons">
@@ -109,7 +156,6 @@
                 <button class="filter-btn" data-tag="律动">律动</button>
             </div>
         </div>
-
         <div class="filter-actions">
             <button class="btn btn-apply" onclick="applyFilter()">✅ 确定筛选</button>
             <button class="btn btn-reset" onclick="resetFilter()">🔄 重置</button>
@@ -117,14 +163,11 @@
     </div>
 </div>
 
-<!-- 主内容区 -->
 <div class="main-container">
-    <!-- 歌曲卡片 -->
     <div class="song-card">
         <div class="song-name" id="songName">歌曲加载中...</div>
         <div class="song-singer" id="songSinger"></div>
         <div class="song-desc" id="songDesc"></div>
-
         <div class="btn-group">
             <button class="btn btn-collect" onclick="collectSong()">✅ 收录歌单</button>
             <button class="btn btn-listen" onclick="listenOnly()">🎵 好听不收</button>
@@ -133,77 +176,36 @@
         </div>
     </div>
 
-    <!-- 音乐平台图标按钮区（已加上文字标注） -->
     <div class="platform-card">
         <div class="platform-buttons">
-            <!-- 抖音 -->
             <div class="platform-item" onclick="openDouyin()">
-                <div class="platform-icon douyin">
-                    <div class="icon-inner">
-                        <div class="douyin-logo"></div>
-                    </div>
-                </div>
+                <div class="platform-icon douyin"><div class="icon-inner"><div class="douyin-logo"></div></div></div>
                 <span class="platform-label">抖音</span>
             </div>
-            <!-- QQ音乐 -->
             <div class="platform-item" onclick="openQQMusic()">
-                <div class="platform-icon qq">
-                    <div class="icon-inner">
-                        <div class="qq-logo"></div>
-                    </div>
-                </div>
+                <div class="platform-icon qq"><div class="icon-inner"><div class="qq-logo"></div></div></div>
                 <span class="platform-label">QQ音乐</span>
             </div>
-            <!-- 酷狗音乐 -->
             <div class="platform-item" onclick="openKuGou()">
-                <div class="platform-icon kugou">
-                    <div class="icon-inner">
-                        <div class="kugou-logo"></div>
-                    </div>
-                </div>
+                <div class="platform-icon kugou"><div class="icon-inner"><div class="kugou-logo"></div></div></div>
                 <span class="platform-label">酷狗</span>
             </div>
-            <!-- 酷狗概念版 -->
-            <div class="platform-item" onclick="openKuGouIdea()">
-                <div class="platform-icon kgidea">
-                    <div class="icon-inner">
-                        <div class="kgidea-logo"></div>
-                    </div>
-                </div>
-                <span class="platform-label">酷狗概念版</span>
-            </div>
-            <!-- 酷我音乐 -->
             <div class="platform-item" onclick="openKuWo()">
-                <div class="platform-icon kuwo">
-                    <div class="icon-inner">
-                        <div class="kuwo-logo"></div>
-                    </div>
-                </div>
+                <div class="platform-icon kuwo"><div class="icon-inner"><div class="kuwo-logo"></div></div></div>
                 <span class="platform-label">酷我</span>
             </div>
-            <!-- 汽水音乐 -->
             <div class="platform-item" onclick="openQiShui()">
-                <div class="platform-icon qishui">
-                    <div class="icon-inner">
-                        <div class="qishui-logo"></div>
-                    </div>
-                </div>
+                <div class="platform-icon qishui"><div class="icon-inner"><div class="qishui-logo"></div></div></div>
                 <span class="platform-label">汽水音乐</span>
             </div>
-            <!-- 抖音极速版 -->
             <div class="platform-item" onclick="openDouyinSpeed()">
-                <div class="platform-icon douyin-speed">
-                    <div class="icon-inner">
-                        <div class="douyin-speed-logo"></div>
-                    </div>
-                </div>
+                <div class="platform-icon douyin-speed"><div class="icon-inner"><div class="douyin-speed-logo"></div></div></div>
                 <span class="platform-label">抖音极速版</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 可折叠歌单 -->
 <div class="collapsible-section">
     <div class="section-header" onclick="toggleSection('collectList')">
         <h3>📁 已收录歌单</h3>
@@ -228,6 +230,153 @@
     <div class="section-content" id="blacklistBox"></div>
 </div>
 
-<script src="script.js"></script>
+<script>
+const songLibrary = [
+    { name: "不呼不吸几多秒", singer: "薛凯琪", desc: "港乐 抒情 少女 粤语" },
+    { name: "十万嬉皮", singer: "万能青年旅店", desc: "摇滚 独立 批判 国语" },
+    { name: "Wave in dream (DLYT-lofi)", singer: "AVITA", desc: "电子 Lofi 氛围感 英文" },
+    { name: "可否抱紧我", singer: "王菲", desc: "港乐 抒情 迷幻 粤语" },
+    { name: "改变自己", singer: "王力宏", desc: "流行 R&B 励志 国语" },
+    { name: "Eminence Front", singer: "The Who", desc: "摇滚 经典 英文 70s" },
+    { name: "Bad As I Used To Be", singer: "Chris Stapleton", desc: "乡村 摇滚 蓝调 英文" },
+    { name: "Disco Yes", singer: "Tom Misch、Poppy Ajudha", desc: "Nu-Jazz 放克 律动 英文" },
+    { name: "泪桥", singer: "伍佰 & China Blue", desc: "摇滚 抒情 国语 经典" },
+    { name: "What a Day", singer: "蔡徐坤", desc: "流行 电子 说唱 国语" },
+    { name: "寂寞流星群", singer: "林忆莲", desc: "港乐 抒情 都市 粤语" },
+    { name: "幻听", singer: "莫文蔚", desc: "流行 迷幻 国语 氛围感" },
+    { name: "灰伯爵的忌廉暇想", singer: "连诗雅", desc: "港乐 抒情 少女 粤语" },
+    { name: "恰似你的温柔", singer: "邓丽君", desc: "经典 抒情 国语 温柔" },
+    { name: "花与爱丽丝", singer: "杨千嬅", desc: "港乐 抒情 少女 粤语" },
+    { name: "Reality", singer: "Richard Sanderson", desc: "民谣 抒情 电影 英文" },
+    { name: "风景", singer: "陈洁仪", desc: "流行 抒情 都市 国语" },
+    { name: "初恋", singer: "莫文蔚", desc: "港乐 复古 轻快 粤语" },
+    { name: "远走高飞", singer: "林忆莲", desc: "流行 R&B 抒情 国语" },
+    { name: "モノクローム", singer: "具岛直子", desc: "CityPop 复古 日文 80s" },
+    { name: "仰望", singer: "杨丞琳", desc: "流行 抒情 励志 国语" },
+    { name: "Set for Life", singer: "Trent Dabbs", desc: "民谣 抒情 治愈 英文" },
+    { name: "Far Away", singer: "EASHA", desc: "流行 独立 空灵 英文" },
+    { name: "I Wanna Know", singer: "Joe", desc: "R&B 抒情 节奏 英文" },
+    { name: "MONTAGEM ALQUIMIA", singer: "h6tam", desc: "巴西 电子 律动 葡语" },
+    { name: "We Are The World", singer: "Michael Jackson", desc: "公益 流行 合唱 英文" },
+    { name: "十二楼", singer: "莫文蔚", desc: "都市 爵士 慵懒 国语" },
+    { name: "完美孤独", singer: "莫文蔚", desc: "流行 抒情 孤独 国语" },
+    { name: "未接来电", singer: "杨乃文", desc: "摇滚 独立 冷感 国语" },
+    { name: "May Rain", singer: "窦靖童", desc: "独立 另类 空灵 英文" },
+    { name: "冰河", singer: "温岚", desc: "流行 R&B 抒情 国语" },
+    { name: "回忆是红色天空", singer: "王菲", desc: "港乐 抒情 迷幻 粤语" },
+    { name: "是这样吗", singer: "莫文蔚", desc: "流行 抒情 慵懒 国语" },
+    { name: "是非题", singer: "范玮琪", desc: "流行 抒情 校园 国语" },
+    { name: "溜溜的情歌", singer: "莫文蔚", desc: "流行 轻快 节奏 国语" },
+    { name: "必杀技", singer: "古巨基", desc: "港乐 抒情 遗憾 粤语" },
+    { name: "Every Summertime", singer: "88rising", desc: "R&B 轻快 夏日 英文" },
+    { name: "sheluvme", singer: "Tai Verdes", desc: "流行 独立 轻松 英文" },
+    { name: "只有冰淇淋的烛光晚餐", singer: "莫文蔚", desc: "爵士 慵懒 都市 国语" },
+    { name: "No Tear No Cry", singer: "Enols Scroggins", desc: "灵魂乐 抒情 英文 70s" },
+    { name: "If I Ain't Got You", singer: "Alicia Keys", desc: "R&B 灵魂乐 抒情 英文" },
+    { name: "在我成为井井有条的大人之前", singer: "郭采洁", desc: "独立 抒情 治愈 国语" },
+    { name: "红粉菲菲", singer: "王菲", desc: "港乐 复古 轻快 粤语" },
+    { name: "小聪明", singer: "王菲", desc: "港乐 抒情 少女 粤语" },
+    { name: "我眼中的她", singer: "张国荣", desc: "港乐 抒情 温柔 粤语" },
+    { name: "把悲伤看透时", singer: "陈慧娴", desc: "港乐 抒情 遗憾 粤语" },
+    { name: "半途而废", singer: "王菲", desc: "流行 励志 轻快 国语" },
+    { name: "Remedy", singer: "蔡徐坤", desc: "流行 电子 抒情 国语" },
+    { name: "Colder (Explicit)", singer: "蔡徐坤", desc: "流行 电子 冷感 英文" },
+    { name: "爱情", singer: "莫文蔚", desc: "流行 抒情 遗憾 国语" },
+    { name: "执迷不悔", singer: "王菲", desc: "流行 抒情 坚定 国语" },
+    { name: "脸", singer: "王菲", desc: "流行 迷幻 空灵 国语" },
+    { name: "乘客", singer: "王菲", desc: "流行 慵懒 都市 国语" },
+    { name: "话题", singer: "莫文蔚", desc: "流行 抒情 都市 国语" },
+    { name: "男孩别哭", singer: "海龟先生", desc: "摇滚 雷鬼 轻快 国语" },
+    { name: "The One You Love", singer: "Glenn Frey", desc: "民谣 抒情 温柔 英文" },
+    { name: "EVERYTHING", singer: "The Black Skirts", desc: "独立 摇滚 抒情 韩文" },
+    { name: "绿色的旋律", singer: "陈洁仪", desc: "流行 抒情 治愈 国语" },
+    { name: "万水千山总是情", singer: "汪明荃", desc: "港乐 经典 抒情 粤语" },
+    { name: "难得有情人", singer: "关淑怡", desc: "港乐 抒情 温柔 粤语" },
+    { name: "外面的世界", singer: "莫文蔚", desc: "民谣 抒情 治愈 国语" },
+    { name: "不羁飞行", singer: "王菲", desc: "港乐 轻快 自由 粤语" },
+    { name: "讲不出再见", singer: "谭咏麟", desc: "港乐 抒情 离别 粤语" },
+    { name: "Dazzling You", singer: "Vivienne", desc: "CityPop 复古 日文 80s" },
+    { name: "心中的日月", singer: "王力宏", desc: "流行 国风 抒情 国语" },
+    { name: "月亮代表我的心", singer: "邓丽君", desc: "经典 抒情 温柔 国语" },
+    { name: "热情", singer: "黄凯芹", desc: "港乐 抒情 热烈 粤语" },
+    { name: "阴天", singer: "莫文蔚", desc: "流行 慵懒 都市 国语" },
+    { name: "Sugar", singer: "Maroon 5", desc: "流行 摇滚 轻快 英文" },
+    { name: "至少还有你", singer: "林忆莲", desc: "流行 抒情 坚定 国语" },
+    { name: "牡丹江", singer: "南拳妈妈", desc: "流行 国风 清新 国语" },
+    { name: "Free Loop", singer: "Daniel Powter", desc: "流行 轻快 励志 英文" },
+    { name: "月牙湾", singer: "F.I.R. 飞儿乐团", desc: "流行 国风 空灵 国语" },
+    { name: "Deadman", singer: "蔡徐坤", desc: "流行 电子 暗黑 英文" },
+    { name: "千千阙歌", singer: "陈慧娴", desc: "港乐 经典 离别 粤语" },
+    { name: "忽然之间", singer: "莫文蔚", desc: "流行 抒情 遗憾 国语" },
+    { name: "分开旅行 (Live)", singer: "黄龄、王赫野", desc: "流行 对唱 抒情 国语" },
+    { name: "终身美丽", singer: "郑秀文", desc: "港乐 抒情 励志 粤语" },
+    { name: "Levitating", singer: "Dua Lipa", desc: "流行 迪斯科 律动 英文" },
+    { name: "Running Up That Hill", singer: "Kate Bush", desc: "另类 流行 空灵 英文" },
+    { name: "糖不甩", singer: "薛凯琪", desc: "港乐 轻快 少女 粤语" },
+    { name: "深蓝", singer: "卢巧音", desc: "港乐 暗黑 抒情 粤语" },
+    { name: "其实我一直都想对你说", singer: "莫文蔚", desc: "流行 抒情 遗憾 国语" },
+    { name: "双城故事", singer: "莫文蔚", desc: "流行 抒情 治愈 国语" }
+];
+
+let collectList = JSON.parse(localStorage.getItem('collectList')) || [];
+let skipList = JSON.parse(localStorage.getItem('skipList')) || [];
+let blockedSingers = JSON.parse(localStorage.getItem('blockedSingers')) || [];
+let usedSongIndex = JSON.parse(localStorage.getItem('usedSongIndex')) || [];
+let selectedTags = [];
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        const tag = btn.dataset.tag;
+        selectedTags.includes(tag) ? selectedTags = selectedTags.filter(t=>t!==tag) : selectedTags.push(tag);
+    });
+});
+
+function toggleFilterPanel(){document.getElementById('filterPanel').classList.toggle('open');}
+function toggleSection(id){document.getElementById(id).closest('.collapsible-section').classList.toggle('open');}
+function getSearchKey(){const n=document.getElementById("songName").innerText;const s=document.getElementById("songSinger").innerText;return encodeURIComponent(`${n} ${s}`);}
+
+function openDouyin(){location.href=`snssdk1128://search?keyword=${getSearchKey()}`;}
+function openDouyinSpeed(){location.href=`snssdk2329://search?keyword=${getSearchKey()}`;}
+function openQQMusic(){location.href=`qqmusic://search?key=${getSearchKey()}`;}
+function openKuGou(){location.href=`kugou://search?keyword=${getSearchKey()}`;}
+function openKuWo(){location.href=`kuwo://search?key=${getSearchKey()}`;}
+function openQiShui(){location.href=`qishuimusic://search?keyword=${getSearchKey()}`;}
+
+function applyFilter(){toggleFilterPanel();usedSongIndex=[];localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));goNextRandom();}
+function resetFilter(){selectedTags=[];document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));usedSongIndex=[];localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));goNextRandom();}
+
+function loadCurrentSong(song){document.getElementById("songName").innerText=song.name;document.getElementById("songSinger").innerText=song.singer;document.getElementById("songDesc").innerText=song.desc;}
+
+function getRandomSong(){
+    let valid=songLibrary.filter((item,idx)=>{
+        if(blockedSingers.includes(item.singer))return false;
+        if(collectList.includes(`${item.name} - ${item.singer}`))return false;
+        if(skipList.includes(`${item.name} - ${item.singer}`))return false;
+        if(usedSongIndex.includes(idx))return false;
+        if(selectedTags.length>0){let tags=item.desc.split(' ');for(let t of selectedTags)if(!tags.includes(t))return false;}
+        return true;
+    });
+    if(!valid.length)return null;
+    let rand=valid[Math.floor(Math.random()*valid.length)];
+    let idx=songLibrary.findIndex(s=>s.name===rand.name&&s.singer===rand.singer);
+    usedSongIndex.push(idx);localStorage.setItem('usedSongIndex',JSON.stringify(usedSongIndex));
+    return rand;
+}
+
+function collectSong(){let s=getCurrentShowSong();if(!s)return;collectList.push(`${s.name} - ${s.singer}`);localStorage.setItem('collectList',JSON.stringify(collectList));renderList();goNextRandom();}
+function listenOnly(){goNextRandom();}
+function skipSong(){let s=getCurrentShowSong();if(!s)return;skipList.push(`${s.name} - ${s.singer}`);localStorage.setItem('skipList',JSON.stringify(skipList));renderList();goNextRandom();}
+function blockSinger(){let s=getCurrentShowSong();if(!s)return;if(!blockedSingers.includes(s.singer)){blockedSingers.push(s.singer);localStorage.setItem('blockedSingers',JSON.stringify(blockedSingers));}renderBlackList();goNextRandom();}
+
+function goNextRandom(){let song=getRandomSong();if(!song){document.getElementById("songName").innerText="当前筛选无更多歌曲";document.getElementById("songSinger").innerText="";document.getElementById("songDesc").innerText="请重置标签或更换筛选条件";return;}loadCurrentSong(song);}
+function getCurrentShowSong(){let n=document.getElementById("songName").innerText;let s=document.getElementById("songSinger").innerText;return songLibrary.find(x=>x.name===n&&x.singer===s);}
+
+function renderList(){document.getElementById("collectList").innerText=collectList.join(" ｜ ");document.getElementById("skipList").innerText=skipList.join(" ｜ ");}
+function renderBlackList(){let box=document.getElementById('blacklistBox');box.innerHTML='';blockedSingers.forEach((item,idx)=>{let span=document.createElement('span');span.className='black-tag';span.innerText=item;span.onclick=()=>unBlockSinger(idx);box.appendChild(span);});}
+function unBlockSinger(idx){blockedSingers.splice(idx,1);localStorage.setItem('blockedSingers',JSON.stringify(blockedSingers));renderBlackList();}
+
+window.onload=function(){renderList();renderBlackList();goNextRandom();}
+</script>
 </body>
 </html>
